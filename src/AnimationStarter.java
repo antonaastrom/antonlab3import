@@ -48,7 +48,8 @@ public class AnimationStarter {
         //showing the animator GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-            	animator.showFrame(); 
+            	animator.showFrame();
+         
             }
         });
 		    
