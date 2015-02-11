@@ -74,21 +74,9 @@ public class AnimationWidget extends JComponent {
 
 		for (Integer i = 0; i < vector.size(); i++) {
 
-			// drawStaple(g, i, vector, stapleAreaHeight, stapleAreaWidth);
+			drawStaple(g, i, vector, stapleAreaHeight, stapleAreaWidth);
 
-			double stapleAreaDynamic = stapleAreaHeight / vector.getMax();
-			double spaceWidth = stapleAreaWidth / (vector.getSize() * 10.0);
-			double stapleWidth = stapleAreaWidth * 9.0
-					/ (vector.getSize() * 10.0);
-			double stapleHeight = vector.get(i) * stapleAreaDynamic;
-			// int spaceWidthI = (int) spaceWidth;
-			// int stapleWidthI = (int) stapleWidth;
-			// int stapleHeightI = (int) stapleHeight;
-			// int stapleAreaHeightI = (int) stapleAreaHeight;
 
-			g.fillRect((int) (startX + (stapleWidth + spaceWidth) * i),
-					(int) (stapleAreaHeight + startY - stapleHeight),
-					(int) stapleWidth, (int) stapleHeight);
 
 		}
 
@@ -109,31 +97,20 @@ public class AnimationWidget extends JComponent {
 	}
 
 	private void drawStaple(Graphics g, Integer stapleNr, DataSet vector,
-			int stapleAreaHeight, int stapleAreaWidth) {
+			double stapleAreaHeight, double stapleAreaWidth) {
 
-		int stapleAreaDynamic = stapleAreaHeight / vector.getMax();
-		double spaceWidth = stapleAreaWidth / (vector.getSize() * 10);
-		double stapleWidth = stapleAreaWidth * 9 / (vector.getSize() * 10);
+		double stapleAreaDynamic = stapleAreaHeight / vector.getMax();
+		double spaceWidth = stapleAreaWidth / (vector.getSize() * 10.0);
+		double stapleWidth = stapleAreaWidth * 9.0 / (vector.getSize() * 10.0);
 		double stapleHeight = vector.get(stapleNr) * stapleAreaDynamic;
-		int spaceWidthI = (int) spaceWidth;
-		int stapleWidthI = (int) stapleWidth;
-		int stapleHeightI = (int) stapleHeight;
-		// int amountOfSpaces = vector.getSize() - stapleNr;
 
 		g.setColor(Color.RED);
 
-		// if (stapleAreaWidth < 110 && amountOfSpaces > 0) {
 
-		g.fillRect(startX + (stapleWidthI + spaceWidthI) * stapleNr,
-				stapleAreaHeight + startY - stapleHeightI, stapleWidthI,
-				stapleHeightI);
-		// amountOfSpaces = amountOfSpaces - 1;
-
-		// } else {
-		// g.fillRect(startX + stapleWidth * stapleNr + stapleNr,
-		// stapleAreaHeight + startY - stapleHeight, stapleWidth,
-		// stapleHeight);
-		// }
+		g.fillRect((int) (startX + (stapleWidth + spaceWidth) * stapleNr),
+				(int) (stapleAreaHeight + startY - stapleHeight),
+				(int) stapleWidth, (int) stapleHeight);
+	
 
 	}
 
