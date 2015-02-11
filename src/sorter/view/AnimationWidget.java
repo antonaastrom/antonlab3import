@@ -25,6 +25,14 @@ public class AnimationWidget extends JComponent {
 	 */
 	private DataSet vector;
 
+	public DataSet getVector() {
+		return vector;
+	}
+
+	public void setVector(DataSet vector) {
+		this.vector = vector;
+	}
+
 	/**
 	 * The name of the algorithm
 	 */
@@ -36,10 +44,18 @@ public class AnimationWidget extends JComponent {
 
 	private Dimension startDim = new Dimension(startWidth, startHeight);
 
-	private Graphics g;
+	int startX = getX() + 4;
+	int startY = getY() + 4;
 
-	int startX = getX() + 3;
-	int startY = getY() + 3;
+	private boolean algorithmFinished;
+
+	private int cmp1 = -1;
+
+	private int cmp2 = -1;
+
+	private int swap1 = -1;
+
+	private int swap2 = -1;
 
 	/**
 	 * Creates an instance of AnimationWidget with a given vector and an
@@ -57,7 +73,6 @@ public class AnimationWidget extends JComponent {
 		this.algorithmName = algorithmName;
 
 		setPreferredSize(startDim);
-		paintComponents(g);
 
 	}
 
@@ -70,15 +85,21 @@ public class AnimationWidget extends JComponent {
 
 		double stapleAreaWidth = getWidth() - 6;
 		double bottomHeight = getHeight() / 50.0;
-		double stapleAreaHeight = getHeight() - 6 - bottomHeight;
+		double stapleAreaHeight = getHeight() - bottomHeight;
 
-		for (Integer i = 0; i < vector.size(); i++) {
+		for (Integer i = 0; i < vector.getSize(); i++) {
+			
+			
 
-			drawStaple(g, i, vector, stapleAreaHeight, stapleAreaWidth);
-
-
+			drawStaple(g, i, stapleAreaHeight, stapleAreaWidth);
+			
 
 		}
+		setAlgorithmFinished(false);
+		beingSwapped(-1,-1);
+		beingCompared(-1,-1);
+		
+		
 
 	}
 
@@ -96,22 +117,73 @@ public class AnimationWidget extends JComponent {
 
 	}
 
-	private void drawStaple(Graphics g, Integer stapleNr, DataSet vector,
+	private void drawStaple(Graphics g, Integer stapleNr,
 			double stapleAreaHeight, double stapleAreaWidth) {
 
 		double stapleAreaDynamic = stapleAreaHeight / vector.getMax();
 		double spaceWidth = stapleAreaWidth / (vector.getSize() * 10.0);
 		double stapleWidth = stapleAreaWidth * 9.0 / (vector.getSize() * 10.0);
 		double stapleHeight = vector.get(stapleNr) * stapleAreaDynamic;
+		int stapleAreaHeightI = (int) stapleAreaHeight;
+		// int stapleWidthI = (int) stapleWidth;
+		// int spaceWidthI= (int) spaceWidth;
 
-		g.setColor(Color.RED);
+		if (algorithmFinished) {
+
+			g.setColor(Color.GREEN);
+			
+
+		} else if (cmp1 == stapleNr || cmp2 == stapleNr) {
+			
+			g.setColor(Color.YELLOW);
+			
+		} else if (swap1 == stapleNr || swap2 == stapleNr) {	
+			
+			g.setColor(Color.BLUE);
+			
+		
+		} else {
+			
+			g.setColor(Color.RED);
+			
+		}
+
+		if ((int) stapleWidth < 1) {
+
+			g.fillRect((int) (startX + (stapleWidth + spaceWidth) * stapleNr),
+					(int) (stapleAreaHeightI + startY - stapleHeight), 1,
+					(int) stapleHeight);
+
+		} else {
+
+			g.fillRect((int) (startX + (stapleWidth + spaceWidth) * stapleNr),
+					(int) (stapleAreaHeightI + startY - stapleHeight),
+					(int) stapleWidth, (int) stapleHeight);
+
+		}
+
+	}
+
+	public void setAlgorithmFinished(boolean finished) {
+
+		this.algorithmFinished = finished;
+	}
 
 
-		g.fillRect((int) (startX + (stapleWidth + spaceWidth) * stapleNr),
-				(int) (stapleAreaHeight + startY - stapleHeight),
-				(int) stapleWidth, (int) stapleHeight);
-	
+	public void beingCompared(int i, int j) {
+		
+		
+		this.cmp1 = i;
+		this.cmp2 = j;
+		
+	}
 
+	public void beingSwapped(int index1, int index2) {
+		// TODO Auto-generated method stub
+		
+		this.swap1 = index1;
+		this.swap2 = index2;
+		
 	}
 
 }

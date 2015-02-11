@@ -96,6 +96,10 @@ public class AlgorithmHandler implements Runnable {
      */
     public void finished() {
         // TODO Tell the widget to show that the algorithm is finished
+    	
+    	widget.setAlgorithmFinished(true);
+    	widget.repaint();
+    	
 
         status.increaseFinishedAlgs();
         waitForOthers();
@@ -125,6 +129,11 @@ public class AlgorithmHandler implements Runnable {
         
         // TODO Give a reference of the vector to the widget
         // TODO Assure that the widget repaints itself (with the new vector) 
+        
+        widget.setVector(sortVector);
+        widget.repaint();
+        
+      
     }
     
     /**
@@ -173,11 +182,16 @@ public class AlgorithmHandler implements Runnable {
      */
     private void swapDone(int index1, int index2){	  
         // TODO Add call to update widget
+    	
+    	widget.beingSwapped(index1,index2);
 
         //oneStepDone is called swapWeight times, in order to 
         //allow a swap to be more expensive than a comparison
         for(int i = 0;  i < swapWeight;  ++i) {
             oneStepDone();
+            
+            widget.repaint();
+        
         }
     }
     
@@ -213,6 +227,9 @@ public class AlgorithmHandler implements Runnable {
          * In that case you also have to consider where and how to
          * stop displaying the comparisons
          */
+    	
+    	widget.beingCompared(i,j);
+    	
         
         oneStepDone(); 
         return sortVector.cmp(i, j);
