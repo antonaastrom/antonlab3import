@@ -68,14 +68,27 @@ public class AnimationWidget extends JComponent {
 
 		drawName(g);
 
-		int stapleAreaWidth = getWidth() - 6;
-		int bottomHeight = getHeight() / 50;
-		int stapleAreaHeight = getHeight() - 6 - bottomHeight;
+		double stapleAreaWidth = getWidth() - 6;
+		double bottomHeight = getHeight() / 50.0;
+		double stapleAreaHeight = getHeight() - 6 - bottomHeight;
 
 		for (Integer i = 0; i < vector.size(); i++) {
-			// for (Integer i = 0; i < 20; i++) {
 
-			drawStaple(g, i, vector, stapleAreaHeight, stapleAreaWidth);
+			// drawStaple(g, i, vector, stapleAreaHeight, stapleAreaWidth);
+
+			double stapleAreaDynamic = stapleAreaHeight / vector.getMax();
+			double spaceWidth = stapleAreaWidth / (vector.getSize() * 10.0);
+			double stapleWidth = stapleAreaWidth * 9.0
+					/ (vector.getSize() * 10.0);
+			double stapleHeight = vector.get(i) * stapleAreaDynamic;
+			// int spaceWidthI = (int) spaceWidth;
+			// int stapleWidthI = (int) stapleWidth;
+			// int stapleHeightI = (int) stapleHeight;
+			// int stapleAreaHeightI = (int) stapleAreaHeight;
+
+			g.fillRect((int) (startX + (stapleWidth + spaceWidth) * i),
+					(int) (stapleAreaHeight + startY - stapleHeight),
+					(int) stapleWidth, (int) stapleHeight);
 
 		}
 
@@ -99,13 +112,29 @@ public class AnimationWidget extends JComponent {
 			int stapleAreaHeight, int stapleAreaWidth) {
 
 		int stapleAreaDynamic = stapleAreaHeight / vector.getMax();
-		int stapleWidth = stapleAreaWidth / vector.getSize() - 1;
-		int stapleHeight = vector.get(stapleNr) * stapleAreaDynamic;
+		double spaceWidth = stapleAreaWidth / (vector.getSize() * 10);
+		double stapleWidth = stapleAreaWidth * 9 / (vector.getSize() * 10);
+		double stapleHeight = vector.get(stapleNr) * stapleAreaDynamic;
+		int spaceWidthI = (int) spaceWidth;
+		int stapleWidthI = (int) stapleWidth;
+		int stapleHeightI = (int) stapleHeight;
+		// int amountOfSpaces = vector.getSize() - stapleNr;
 
 		g.setColor(Color.RED);
-		g.fillRect(startX + stapleWidth * stapleNr + stapleNr, stapleAreaHeight
-				+ startY - stapleHeight, stapleWidth, stapleHeight);
+
+		// if (stapleAreaWidth < 110 && amountOfSpaces > 0) {
+
+		g.fillRect(startX + (stapleWidthI + spaceWidthI) * stapleNr,
+				stapleAreaHeight + startY - stapleHeightI, stapleWidthI,
+				stapleHeightI);
+		// amountOfSpaces = amountOfSpaces - 1;
+
+		// } else {
+		// g.fillRect(startX + stapleWidth * stapleNr + stapleNr,
+		// stapleAreaHeight + startY - stapleHeight, stapleWidth,
+		// stapleHeight);
+		// }
 
 	}
-	// TODO Add more methods...
+
 }
