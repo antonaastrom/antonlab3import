@@ -113,7 +113,7 @@ public class AnimationWidget extends JComponent {
 	private void drawRectangle(Graphics g) {
 
 		g.setColor(Color.BLACK);
-		g.drawRect(getX() + 1, getY() + 1, getWidth() - 3, getHeight() - 3);
+		g.drawRect(startX - 3, startY - 3, getWidth() - 3, getHeight() - 3);
 
 	}
 
@@ -145,6 +145,7 @@ public class AnimationWidget extends JComponent {
 		} else {
 			
 			g.setColor(Color.RED);
+			
 			
 		}
 

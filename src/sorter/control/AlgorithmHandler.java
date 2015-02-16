@@ -103,6 +103,7 @@ public class AlgorithmHandler implements Runnable {
 
         status.increaseFinishedAlgs();
         waitForOthers();
+        
     }    
     
     /**
@@ -184,6 +185,7 @@ public class AlgorithmHandler implements Runnable {
         // TODO Add call to update widget
     	
     	widget.beingSwapped(index1,index2);
+    	widget.repaint();
 
         //oneStepDone is called swapWeight times, in order to 
         //allow a swap to be more expensive than a comparison

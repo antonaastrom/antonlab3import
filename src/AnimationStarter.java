@@ -1,4 +1,8 @@
 import sorter.control.algorithms.BubbleSortAlgorithm;
+import sorter.control.algorithms.ImprovedBubbleSortAlgorithm;
+import sorter.control.algorithms.InsertionSort;
+import sorter.control.algorithms.QuickSort;
+import sorter.control.algorithms.ShellSort;
 import sorter.view.Animator;
 
 
@@ -40,6 +44,10 @@ public class AnimationStarter {
 		      
 		//Adds algorithms to the system
 		animator.addAlgorithm(new BubbleSortAlgorithm());
+		//animator.addAlgorithm(new ImprovedBubbleSortAlgorithm());
+		animator.addAlgorithm(new InsertionSort());
+		animator.addAlgorithm(new ShellSort());
+		//animator.addAlgorithm(new QuickSort());
 		//Add more algorithms here in the same way as for bubble sort
 		
         
